@@ -1,0 +1,69 @@
+#!/bin/bash
+
+source "$(dirname "$0")/.env"
+
+bold=$(tput bold)
+green=$(tput setaf 2)
+title=${bold}$(tput setaf 1)
+reset=$(tput sgr0)
+
+function docker_shell() {
+    echo -e "${green}DCLI: Open shell in ${bold}$1${reset}${green} docker container${reset}"
+    docker-compose run --rm $1 bash
+}
+
+function docker_start() {
+    echo -e "${green}DCLI: Start all docker containers${reset}"
+    docker-compose up -d --no-recreate
+}
+
+function docker_restart() {
+    echo -e "${green}DCLI: Restart all docker containers${reset}"
+    docker-compose restart
+}
+
+function docker_stop() {
+    echo -e "${green}DCLI: Stop all docker containers${reset}"
+    docker-compose stop
+}
+
+function docker_recreate() {
+    echo -e "${green}DCLI: Recreate all docker containers${reset}"
+    docker-compose up -d
+}
+
+function docker_destroy() {
+    echo -e "${green}DCLI: Destroy all docker containers${reset}"
+    docker-compose down
+}
+
+echo -e "${title}Docker CLI${reset}"
+
+if [ -z "$1" ]; then
+    echo -e "${green}About:${reset}"
+    echo -e "Docker CLI platform released for simple development with Docker."
+    echo -e "Supported by IOXICO (https://ioxico.com/)."
+    echo -e "${green}Commands:${reset}"
+    echo -e "* start — start all docker containers;"
+    echo -e "* restart — restart all docker containers;"
+    echo -e "* stop — stop all docker containers;"
+    echo -e "* recreate — recreate all docker containers;"
+    echo -e "* destroy — destroy all docker containers;"
+    echo -e "* shell CONTAINER — open shell in docker container (default php);"
+elif [ "$1" = "start" ]; then
+    docker_start
+elif [ "$1" = "restart" ]; then
+    docker_restart
+elif [ "$1" = "stop" ]; then
+    docker_stop
+elif [ "$1" = "recreate" ]; then
+    docker_recreate
+elif [ "$1" = "destroy" ]; then
+    docker_destroy
+elif [ "$1" = "shell" ]; then
+    if [ -n "$2" ]; then
+        docker_shell $2
+    else
+        docker_shell php
+    fi
+fi
