@@ -9,11 +9,11 @@ Docker CLI platform released for simple development with Docker.
 
 ## Configuration
 
-* Copy `.env.sample` to `.env` file;
-* Change `COMPOSE_PROJECT_NAME` value in `.env` file;
+* Copy `dcli.env.sample` to `../dcli.env` file;
+* Change `PROJECT_NAME` value in `.env` file;
 * Change any other values value in `.env` file if necessary;
-* Copy `docker-compose.yml.sample` to `docker-compose.yml` file; 
-* Change configuration in `docker-compose.yml` file related to your project needs.
+* Copy `dcli.yml.sample` to `../dcli.yml` file; 
+* Change configuration in `dcli.yml` file related to your project needs.
 
 ## Initialize
 
