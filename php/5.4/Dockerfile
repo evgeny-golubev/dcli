@@ -16,8 +16,7 @@ RUN apt-get install -y \
     php5-geoip \
     && rm -rf /var/lib/apt/lists/*
 
-RUN pecl install zendopcache-7.0.5
-RUN echo "extension=opcache.so" > /usr/local/etc/php/conf.d/opcache.ini
+RUN pecl install apc
 
 RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/
 RUN docker-php-ext-install \
