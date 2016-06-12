@@ -1,40 +1,46 @@
 #!/bin/bash
 
-source "$(dirname "$0")/.env"
+cd $(dirname "$0")
+source ../dcli.env
 
 bold=$(tput bold)
+red=$(tput setaf 1)
 green=$(tput setaf 2)
-title=${bold}$(tput setaf 1)
+title=${bold}${red}
 reset=$(tput sgr0)
 
-function docker_shell() {
+function dcli_compose() {
+    docker-compose -f ../dcli.yml -p ${PROJECT_NAME} ${*}
+}
+
+function dcli_shell() {
     echo -e "${green}DCLI: Open shell in ${bold}$1${reset}${green} docker container${reset}"
-    docker-compose run --rm $1 bash
+    dcli_compose run --rm $1 bash
 }
 
-function docker_start() {
+function dcli_start() {
     echo -e "${green}DCLI: Start all docker containers${reset}"
-    docker-compose up -d --no-recreate
+    dcli_compose up -d --no-recreate
 }
 
-function docker_restart() {
+function dcli_restart() {
     echo -e "${green}DCLI: Restart all docker containers${reset}"
-    docker-compose restart
+    dcli_compose restart
 }
 
-function docker_stop() {
+function dcli_stop() {
     echo -e "${green}DCLI: Stop all docker containers${reset}"
-    docker-compose stop
+    dcli_compose stop
 }
 
-function docker_recreate() {
+function dcli_recreate() {
     echo -e "${green}DCLI: Recreate all docker containers${reset}"
-    docker-compose up -d
+    dcli_compose up -d
 }
 
-function docker_destroy() {
+function dcli_destroy() {
     echo -e "${green}DCLI: Destroy all docker containers${reset}"
-    docker-compose down
+    dcli_compose down
 }
 
 echo -e "${title}Docker CLI${reset}"
@@ -50,20 +56,23 @@ if [ -z "$1" ]; then
     echo -e "* recreate — recreate all docker containers;"
     echo -e "* destroy — destroy all docker containers;"
     echo -e "* shell CONTAINER — open shell in docker container (default php);"
+    echo -e "${red}* any other command executed as docker-compose command.${reset}"
 elif [ "$1" = "start" ]; then
-    docker_start
+    dcli_start
 elif [ "$1" = "restart" ]; then
-    docker_restart
+    dcli_restart
 elif [ "$1" = "stop" ]; then
-    docker_stop
+    dcli_stop
 elif [ "$1" = "recreate" ]; then
-    docker_recreate
+    dcli_recreate
 elif [ "$1" = "destroy" ]; then
-    docker_destroy
+    dcli_destroy
 elif [ "$1" = "shell" ]; then
     if [ -n "$2" ]; then
-        docker_shell $2
+        dcli_shell $2
     else
-        docker_shell php
+        dcli_shell php
     fi
+else
+    dcli_compose ${*}
 fi
