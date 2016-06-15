@@ -10,11 +10,13 @@ RUN apt-get install -y \
     libmcrypt-dev \
     libxslt-dev \
     libicu-dev \
+    unzip \
     geoip-bin \
     geoip-database \
     libgeoip-dev \
-    php5-geoip \
-    && rm -rf /var/lib/apt/lists/*
+    php5-geoip
+
+RUN rm -rf /var/lib/apt/lists/*
 
 RUN pecl install apc
 
@@ -27,6 +29,7 @@ RUN docker-php-ext-install \
     mbstring \
     pdo_mysql \
     mysqli \
+    zip \
     xsl \
     xmlrpc
 

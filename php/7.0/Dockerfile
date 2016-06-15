@@ -10,22 +10,26 @@ RUN apt-get install -y \
     libmcrypt-dev \
     libxslt-dev \
     libicu-dev \
+    unzip \
     geoip-bin \
     geoip-database \
     libgeoip-dev \
-    php5-geoip \
-    && rm -rf /var/lib/apt/lists/*
+    php5-geoip
+
+RUN rm -rf /var/lib/apt/lists/*
 
 RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/
 RUN docker-php-ext-install \
     opcache \
     dba \
     gd \
-    mcrypt \
     iconv \
+    mcrypt \
     mbstring \
+    memcached \
     pdo_mysql \
     mysqli \
+    zip \
     xsl \
     xmlrpc
 
