@@ -26,7 +26,6 @@ RUN docker-php-ext-install \
     iconv \
     mcrypt \
     mbstring \
-    memcached \
     pdo_mysql \
     mysqli \
     zip \
