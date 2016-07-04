@@ -16,8 +16,6 @@ RUN apt-get install -y \
     php5-geoip \
     && rm -rf /var/lib/apt/lists/*
 
-RUN pecl install apc
-
 RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/
 RUN docker-php-ext-install \
     dba \
@@ -29,6 +27,11 @@ RUN docker-php-ext-install \
     mysqli \
     xsl \
     xmlrpc
+
+RUN pear config-set php_ini /usr/local/etc/php/php.ini
+RUN pecl config-set php_ini /usr/local/etc/php/php.ini
+RUN pecl install apc
+RUN echo "extension=apc.so" > /usr/local/etc/php/conf.d/apc.ini
 
 RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
     && php composer-setup.php \
