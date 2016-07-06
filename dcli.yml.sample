@@ -26,6 +26,7 @@ services:
     volumes:
       - .:/var/www/html
       - ./dcli/php/php.ini:/usr/local/etc/php/php.ini:ro
+      - ./dcli/php/php.conf:/usr/local/etc/php-fpm.d/php.conf:ro
     links:
       - mysql:mysql
       - memcached:memcached

@@ -27,6 +27,7 @@ RUN docker-php-ext-install \
     mbstring \
     pdo_mysql \
     mysqli \
+    soap \
     zip \
     xsl \
     xmlrpc
