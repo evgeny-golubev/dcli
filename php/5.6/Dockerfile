@@ -14,7 +14,8 @@ RUN apt-get install -y \
     geoip-bin \
     geoip-database \
     libgeoip-dev \
-    php5-geoip
+    php5-geoip \
+    nano
 
 RUN rm -rf /var/lib/apt/lists/*
 
