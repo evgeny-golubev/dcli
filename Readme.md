@@ -12,7 +12,7 @@ Docker CLI platform released for simple development with Docker.
 * Copy `dcli.env.sample` to `../dcli.env` file;
 * Change `PROJECT_NAME` value in `.env` file;
 * Change any other values value in `.env` file if necessary;
-* Copy `dcli.yml.sample` to `../dcli.yml` file; 
+* Copy `dcli.yml.php.sample` or `dcli.yml.static.sample` to `../dcli.yml` file;
 * Change configuration in `dcli.yml` file related to your project needs.
 
 ## Initialize

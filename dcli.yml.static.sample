@@ -1,0 +1,12 @@
+version: '2'
+services:
+  nginx:
+    image: nginx:latest
+    env_file: dcli.env
+    ports:
+      - 3000:80
+    volumes:
+      - .:/var/www/html
+      - ./dcli/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./dcli/nginx/conf.d/default.static.template:/etc/nginx/conf.d/default.template:ro
+    command: /bin/bash -c "envsubst '$$NGINX_WORKING_DIRECTORY' < /etc/nginx/conf.d/default.template > /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'"

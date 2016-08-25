@@ -1,0 +1,21 @@
+server {
+    listen 80;
+
+    server_name localhost;
+
+    root /var/www/html$NGINX_WORKING_DIRECTORY;
+
+    index index.html index.htm;
+
+    charset utf-8;
+
+    location / {
+        try_files $uri $uri/ /index.html?$query_string;
+    }
+
+    error_page 404 /404.html;
+
+    location ~ /\.ht {
+        deny  all;
+    }
+}
