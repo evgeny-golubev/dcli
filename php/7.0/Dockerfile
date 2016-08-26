@@ -3,7 +3,7 @@ MAINTAINER IOXICO <admin@ioxico.com>
 
 RUN apt-get update
 
-RUN apt-get install -y \
+RUN apt-get install -y --no-install-recommends \
     libfreetype6-dev \
     libjpeg62-turbo-dev \
     libpng12-dev \
@@ -51,4 +51,7 @@ RUN apt-get -y install libmemcached11 libmemcachedutil2 libmemcached-dev \
     && make \
     && echo "extension=/usr/local/share/php-memcached/modules/memcached.so" > /usr/local/etc/php/conf.d/memcached.ini
 
-RUN rm -rf /var/lib/apt/lists/*
+RUN apt-get -y purge git \
+    && apt-get -y autoclean \
+    && apt-get -y autoremove \
+    && rm -rf /var/lib/apt/lists/*

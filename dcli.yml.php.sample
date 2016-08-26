@@ -34,6 +34,7 @@ services:
 
   mysql:
     image: mariadb
+#    image: mysql
     env_file: dcli.env
     restart: always
     ports:
