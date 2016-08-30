@@ -50,6 +50,10 @@ RUN apt-get -y install libmemcached11 libmemcachedutil2 libmemcached-dev \
     && make \
     && echo "extension=/usr/local/share/php-memcached/modules/memcached.so" > /usr/local/etc/php/conf.d/memcached.ini
 
+RUN curl -OsSL https://phar.phpunit.de/phpunit.phar \
+    && chmod +x phpunit.phar \
+    && mv phpunit.phar /usr/local/bin/phpunit
+    
 RUN apt-get -y purge git \
     && apt-get -y autoclean \
     && apt-get -y autoremove \
