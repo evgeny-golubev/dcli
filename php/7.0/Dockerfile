@@ -15,7 +15,8 @@ RUN apt-get install -y --no-install-recommends \
     geoip-database \
     libgeoip-dev \
     nano \
-    git
+    git \
+    mysql-client
 
 RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/
 RUN docker-php-ext-install \

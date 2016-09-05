@@ -15,7 +15,8 @@ RUN apt-get install -y \
     geoip-database \
     libgeoip-dev \
     php5-geoip \
-    nano
+    nano \
+    mysql-client
 
 RUN rm -rf /var/lib/apt/lists/*
 
@@ -42,4 +43,3 @@ RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
 RUN php -r "readfile('http://files.drush.org/drush.phar');" > drush \
     && chmod +x drush \
     && mv drush /usr/local/bin
-

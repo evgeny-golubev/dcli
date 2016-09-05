@@ -15,7 +15,8 @@ RUN apt-get install -y \
     geoip-database \
     libgeoip-dev \
     php5-geoip \
-    nano
+    nano \
+    mysql-client
 
 RUN rm -rf /var/lib/apt/lists/*
 
